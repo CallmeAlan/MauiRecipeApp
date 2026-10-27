@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+    <!--
+      覆盖 MAUI 主主题：状态栏透明 + 内容可绘制到系统栏背景上。
+      主题层设置确保状态栏永不显示 MAUI 默认紫色，具体图标颜色由代码按背景亮度动态控制。
+    -->
+    <style name="Maui.MainTheme" parent="Maui.MainTheme.Base">
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <!-- 底部导航栏保持浅色，避免透明后显示异常 -->
+        <item name="android:navigationBarColor">#FFFFFF</item>
+        <!-- 去掉 window 内容层顶部的默认阴影（状态栏下方的暗色阴影带） -->
+        <item name="android:windowContentOverlay">@null</item>
+        <!--
+          关闭 Android 15+ 强制 edge-to-edge（API 35 属性，旧版本自动忽略）：
+          否则透明状态栏会被系统自动盖上一层约 40% 的黑色 scrim 对比度遮罩，
+          导致状态栏区域看起来"灰蒙蒙/带阴影"。关闭后状态栏颜色完全由应用控制。
+        -->
+        <item name="android:windowOptOutEdgeToEdgeEnforcement">true</item>
+    </style>
+
+    <!--
+      关键修复：MAUI 导航栏容器（AppBarLayout）会延伸到状态栏区域，
+      其默认背景为紫色 colorPrimary，导致有导航栏的页面状态栏显示紫色。
+      改为透明后，状态栏区域直接透出页面背景色。
+    -->
+    <style name="MauiAppBarLayout" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:background">@android:color/transparent</item>
+        <!-- 去掉 AppBarLayout 的 elevation 投影（状态栏下方可能出现的阴影线） -->
+        <item name="android:elevation">0dp</item>
+    </style>
+</resources>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiRecipeApp.BgColorSettingsPage"
+             Title="背景颜色">
+    <ScrollView x:Name="colorScroll" Padding="15">
+        <VerticalStackLayout Spacing="18">
+            <Label Text="点击色块选择背景颜色，选中的颜色会立即应用到整个应用"
+                   FontSize="Small" TextColor="#888888"/>
+
+            <!-- 色块网格：预设 + 用户自定义（Grid 4列，修复FlexLayout在安卓上左偏移被截断的问题） -->
+            <Grid x:Name="colorGrid" ColumnDefinitions="*,*,*,*" ColumnSpacing="14" RowSpacing="14"/>
+
+            <!-- 新增颜色 -->
+            <Button Text="+  新增颜色"
+                    FontSize="Medium"
+                    BackgroundColor="#ff782b"
+                    TextColor="White"
+                    CornerRadius="25"
+                    Padding="0,12"
+                    Clicked="OnAddColorClicked"/>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiRecipeApp.ProfilePage"
+             Title="个人中心"
+             BackgroundColor="#E8F5E9">
+    <ScrollView x:Name="profileScroll">
+        <VerticalStackLayout Padding="15" Spacing="15">
+            <!-- 用户卡片 -->
+            <Border BackgroundColor="White" StrokeShape="RoundRectangle 16" Padding="15">
+                <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
+                    <Border WidthRequest="56" HeightRequest="56"
+                            StrokeShape="RoundRectangle 28"
+                            BackgroundColor="#ff782b">
+                        <Label Text="玉" TextColor="White" FontSize="24" FontAttributes="Bold"
+                               HorizontalOptions="Center" VerticalOptions="Center"/>
+                    </Border>
+                    <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="2">
+                        <Label Text="美食家" FontSize="18" FontAttributes="Bold"/>
+                        <Label Text="管理你的菜谱与偏好设置" FontSize="Small" TextColor="#888888"/>
+                    </VerticalStackLayout>
+                    <Label Text="›" Grid.Column="2" FontSize="22" TextColor="#cccccc" VerticalOptions="Center"/>
+                </Grid>
+            </Border>
+
+            <!-- 功能列表 -->
+            <Border BackgroundColor="White" StrokeShape="RoundRectangle 16" Padding="0">
+                <VerticalStackLayout>
+                    <!-- 背景颜色入口 -->
+                    <Grid ColumnDefinitions="Auto,*,Auto,Auto" ColumnSpacing="10" Padding="15,14">
+                        <Label Text="🎨" FontSize="20"/>
+                        <Label Text="背景颜色" Grid.Column="1" FontSize="Medium" VerticalOptions="Center"/>
+                        <Border x:Name="colorPreview" Grid.Column="2"
+                                WidthRequest="22" HeightRequest="22"
+                                StrokeShape="RoundRectangle 5"
+                                Stroke="#dddddd" StrokeThickness="1"
+                                VerticalOptions="Center"/>
+                        <Label Text="›" Grid.Column="3" FontSize="22" TextColor="#cccccc" VerticalOptions="Center"/>
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnBgColorTapped"/>
+                        </Grid.GestureRecognizers>
+                    </Grid>
+                    <BoxView HeightRequest="1" Color="#f0f0f0"/>
+
+                    <!-- 导入菜谱：按 JSON 格式批量导入 -->
+                    <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="10" Padding="15,14">
+                        <Label Text="📥" FontSize="20"/>
+                        <Label Text="导入菜谱" Grid.Column="1" FontSize="Medium" VerticalOptions="Center"/>
+                        <Label Text="›" Grid.Column="2" FontSize="22" TextColor="#cccccc" VerticalOptions="Center"/>
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnImportTapped"/>
+                        </Grid.GestureRecognizers>
+                    </Grid>
+                    <BoxView HeightRequest="1" Color="#f0f0f0"/>
+
+                    <!-- 导出菜谱：全部菜谱导出为 JSON 文件并分享（与导入格式一致） -->
+                    <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="10" Padding="15,14">
+                        <Label Text="📤" FontSize="20"/>
+                        <Label Text="导出菜谱" Grid.Column="1" FontSize="Medium" VerticalOptions="Center"/>
+                        <Label Text="›" Grid.Column="2" FontSize="22" TextColor="#cccccc" VerticalOptions="Center"/>
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnExportTapped"/>
+                        </Grid.GestureRecognizers>
+                    </Grid>
+                    <BoxView HeightRequest="1" Color="#f0f0f0"/>
+
+                    <!-- 占位项：后续功能可继续追加 -->
+                    <Grid ColumnDefinitions="Auto,*,Auto,Auto" ColumnSpacing="10" Padding="15,14">
+                        <Label Text="📖" FontSize="20"/>
+                        <Label Text="我的菜谱" Grid.Column="1" FontSize="Medium" VerticalOptions="Center" TextColor="#999999"/>
+                        <Label Text="即将上线" Grid.Column="2" FontSize="Small" TextColor="#cccccc" VerticalOptions="Center"/>
+                    </Grid>
+                </VerticalStackLayout>
+            </Border>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiRecipeApp.RecipeEditPage"
+             BackgroundColor="#E8F5E9"
+             Title="编辑菜谱">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="分享" IconImageSource="share.svg" Clicked="OnShareClicked"/>
+    </ContentPage.ToolbarItems>
+    <ScrollView x:Name="contentScroll" Padding="15">
+        <VerticalStackLayout x:Name="contentLayout" Spacing="20">
+            <!-- 顶部图片区域 + 相机按钮 -->
+            <Grid>
+                <Image x:Name="imgPreview"
+                       HeightRequest="220"
+                       Aspect="AspectFill"
+                       BackgroundColor="#eeeeee"
+                       />
+                <Button x:Name="btnPickImage"
+                        ImageSource="camera.png"
+                        Padding="0"
+                        WidthRequest="40"
+                        HeightRequest="40"
+                        CornerRadius="20"
+                        BackgroundColor="White"
+                        HorizontalOptions="End"
+                        VerticalOptions="Start"
+                        Margin="10"
+                        Clicked="OnPickImageClicked"/>
+            </Grid>
+
+            <!-- 菜谱名称 -->
+            <Border x:Name="cardName" Padding="12" StrokeShape="RoundRectangle 12">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="菜谱名称" FontSize="Medium"/>
+                    <Entry x:Name="txtName" Placeholder="请输入菜谱名称"/>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- 分类选择 -->
+            <Border Padding="12" StrokeShape="RoundRectangle 12">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="分类" FontSize="Medium"/>
+                    <Picker x:Name="pickerCategory" Title="请选择分类">
+                        <Picker.Items>
+                            <x:String>荤菜</x:String>
+                            <x:String>素菜</x:String>
+                            <x:String>主食</x:String>
+                            <x:String>汤品</x:String>
+                            <x:String>甜品</x:String>
+                        </Picker.Items>
+                    </Picker>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- 耗时 -->
+            <Border Padding="12" StrokeShape="RoundRectangle 12">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="耗时（分钟）" FontSize="Medium"/>
+                    <Entry x:Name="txtDuration" Keyboard="Numeric" Placeholder="例如：30"/>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- 食材 -->
+            <Border Padding="12" StrokeShape="RoundRectangle 12">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="食材" FontSize="Medium"/>
+                    <Editor x:Name="edtIngredients" AutoSize="TextChanges" Placeholder="请输入食材"/>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- 菜谱步骤：动态列表，每行 = 自动编号 + 单行输入 + 删除按钮，回车自动新增 -->
+            <Border Padding="12" StrokeShape="RoundRectangle 12">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="菜谱步骤" FontSize="Medium"/>
+                    <VerticalStackLayout x:Name="stepsContainer" Spacing="10"/>
+                    <Button x:Name="btnAddStep" Text="＋ 添加步骤"
+                            FontSize="Small"
+                            BackgroundColor="Transparent"
+                            TextColor="#ff782b"
+                            HorizontalOptions="Start"
+                            Padding="0"
+                            Clicked="OnAddStepClicked"/>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- 底部按钮区域：删除、保存 -->
+            <Grid x:Name="btnArea" ColumnDefinitions="*,*" ColumnSpacing="15" Margin="0,20,0,10">
+                <Button x:Name="btnDelete"
+                  Grid.Column="0"
+                  Text="删除"
+                  BackgroundColor="White"
+                  TextColor="#333333"
+                  BorderColor="#cccccc"
+                  BorderWidth="1"
+                  CornerRadius="25"
+                  Clicked="OnDeleteRecipeClicked"/>
+                <Button Grid.Column="1"
+                        Text="保存"
+                        BackgroundColor="#ff782b"
+                        TextColor="White"
+                        CornerRadius="25"
+                        Clicked="OnSaveRecipeClicked"/>
+            </Grid>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
